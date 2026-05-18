@@ -1,0 +1,157 @@
+{
+  "seed": 42,
+  "arquivo_entrada": "data/raw/original.parquet",
+  "pasta_saida": "outputs/main_experiment",
+  "cache_dir": "outputs/main_experiment/cache",
+
+  "coluna_tempo": "measurement_time",
+  "coluna_estacao": "code",
+
+  "target_cols": [
+    "inmet_temperature",
+    "inmet_humidity",
+    "inmet_rainfall",
+    "inmet_pressure",
+    "inmet_global_radiation",
+    "inmet_dew_point",
+    "inmet_wind_speed"
+  ],
+  "feature_cols": [
+    "inmet_altitude",
+    "inmet_latitude",
+    "inmet_longitude",
+
+    "era5land_temperature",
+    "era5land_humidity",
+    "era5land_rainfall",
+    "era5land_pressure",
+    "era5land_global_radiation",
+    "era5land_dew_point",
+    "era5land_wind_speed"
+  ],
+
+  "feature_n_normalizar": ["hour_sin", "hour_cos", "doy_sin", "doy_cos"],
+
+  "train_frac_dev": 0.8,
+  "val_frac_within_dev": 0.2,
+  "gap_steps": 72,
+  "window_size": 72,
+  "step_size": 24,
+
+  "max_windows_train": null,
+  "max_windows_val": null,
+  "max_windows_test": null,
+
+  "mask_fraction_eval": 0.2,
+  "MASKARAMENTO_ALEATORIO_DOS_CENARIOS": [
+    0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8
+  ],
+
+  "physical_limits": {
+    "inmet_temperature": [-5, 45],
+    "inmet_humidity": [0, 100],
+    "inmet_rainfall": [0, null],
+    "inmet_pressure": [800, 1050],
+    "inmet_global_radiation": [0, 5000],
+    "inmet_dew_point": [-10, 35],
+    "inmet_wind_speed": [0, 40]
+  },
+
+  "run_saits": false,
+  "run_imputeformer": false,
+  "run_transformer": false,
+
+  "run_tuning": false,
+
+  "run_baselines": false,
+
+  "run_median_baseline": false,
+  "run_locf_baseline": false,
+  "run_locf_then_median_baseline": false,
+
+  "run_knn_baseline": false,
+  "run_missforest_baseline": false,
+  "run_xgb_per_target_baseline": true,
+  "run_xgb_multioutput_baseline": false,
+
+  "run_base_scenario": true,
+  "run_mcar_scenarios": true,
+
+  "save_prediction_samples": true,
+  "save_prediction_samples_n": 100,
+  "save_mask_arrays": true,
+
+  "device": "cuda",
+  "num_workers": 0,
+  "resume_training_from_checkpoint": true,
+  "skip_fit_if_checkpoint_loaded": false,
+
+  "epochs": 100,
+  "patience": 20,
+  "tune_epochs": 30,
+  "tune_patience": 5,
+  "saits_tuning_trials": 10,
+  "imp_tuning_trials": 5,
+  "transf_tuning_trials": 5,
+
+  "saits_model_saving_strategy": "best",
+  "imp_model_saving_strategy": "best",
+  "transformer_model_saving_strategy": "best",
+
+  "saits_optimizer": "adamw",
+  "saits_lr": 0.001,
+  "saits_weight_decay": 0.01,
+
+  "imp_optimizer": "adamw",
+  "imp_lr": 0.001,
+  "imp_weight_decay": 0.01,
+
+  "transf_optimizer": "adamw",
+  "transf_lr": 0.001,
+  "transf_weight_decay": 0.01,
+
+  "knn_neighbors": 5,
+  "knn_weights": "uniform",
+  "knn_max_rows_fit": 100000,
+  "knn_transform_batch_size": 2000,
+
+  "mf_n_estimators": 50,
+  "mf_max_iter": 10,
+  "mf_max_depth": 5,
+  "mf_max_features": "sqrt",
+  "mf_min_samples_split": 2,
+  "mf_bootstrap": false,
+  "mf_n_jobs": -1,
+  "mf_tol": 0.01,
+  "mf_n_nearest_features": 10,
+  "mf_max_rows_fit": 50000,
+  "mf_transform_batch_size": 2000,
+
+  "xgb_device": "cuda",
+  "xgb_n_estimators": 150,
+  "xgb_max_depth": 4,
+  "xgb_learning_rate": 0.05,
+  "xgb_subsample": 0.8,
+  "xgb_colsample_bytree": 0.8,
+  "xgb_reg_alpha": 0.0,
+  "xgb_reg_lambda": 1.0,
+  "xgb_n_jobs": 1,
+
+  "xgb_mo_device": "cuda",
+  "xgb_mo_predict_device": "cuda",
+  "xgb_mo_n_estimators": 100,
+  "xgb_mo_max_depth": 4,
+  "xgb_mo_learning_rate": 0.05,
+  "xgb_mo_subsample": 0.8,
+  "xgb_mo_colsample_bytree": 0.8,
+  "xgb_mo_reg_alpha": 0.0,
+  "xgb_mo_reg_lambda": 1.0,
+  "xgb_mo_n_jobs": 1,
+  "xgb_mo_early_stopping_rounds": 20,
+  "xgb_mo_eval_metric": "rmse",
+  "xgb_mo_multi_strategy": "multi_output_tree",
+  "xgb_early_stopping_rounds": 20,
+  "xgb_eval_metric": "rmse",
+
+  "xgb_tuning_trials": 15
+}

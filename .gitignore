@@ -1,0 +1,23 @@
+# Ambientes Virtuais
+venv/
+env/
+.env
+
+# Dados (MUITO IMPORTANTE)
+data/
+*.parquet
+*.csv
+
+# Arquivos temporários do Python e Optuna
+__pycache__/
+*.sqlite3
+*.log
+
+# Cache e Outputs pesados
+outputs/
+*.npz
+*.npy
+*.zip
+
+results XGboostMeuPC/
+resultados/
